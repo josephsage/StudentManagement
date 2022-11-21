@@ -1,0 +1,971 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Student;
+
+import java.awt.Component;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
+import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableColumn;
+/**
+ *
+ * @author user
+ */
+public class Home extends javax.swing.JFrame {
+
+    /**
+     * Creates new form Home
+     */
+    String username = "root";
+    String password = "joseph558745";
+    String datacon = "jdbc:mysql://localhost:3306/stdb";
+    
+    Connection sqlCon = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    int q, i;
+    
+    public Home() {
+        initComponents();
+        
+        jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+    }
+    
+    public void uploadDB ()
+    {
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlCon = DriverManager.getConnection(datacon,username,password);
+            pst = sqlCon.prepareStatement("select * from stdb");  
+            rs = pst.executeQuery();
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            q = stData.getColumnCount();
+            
+            DefaultTableModel studentRecord = (DefaultTableModel)jTable1.getModel();
+            studentRecord.setRowCount(0);
+            
+            while (rs.next())
+            {
+                Vector columnData = new Vector();
+                
+                for (i = 1; i<= q; i++)
+                {
+                    columnData.add(rs.getString("StudentID"));
+                    columnData.add(rs.getString("Firstname"));
+                    columnData.add(rs.getString("Surname"));
+                    columnData.add(rs.getString("Address"));
+                    columnData.add(rs.getString("Gender"));
+                    columnData.add(rs.getString("DOB"));
+                    columnData.add(rs.getString("Mobile"));
+                    columnData.add(rs.getString("Email"));
+                    
+                    columnData.add(rs.getString("Course"));
+                    columnData.add(rs.getString("CourseCode"));
+                    columnData.add(rs.getString("HomeStudent"));
+                    columnData.add(rs.getString("OverseaStudent"));
+                    columnData.add(rs.getString("Accomodation"));
+                    columnData.add(rs.getString("Exchange"));
+                    columnData.add(rs.getString("Scholarship"));
+                    
+                    columnData.add(rs.getString("BA"));
+                    columnData.add(rs.getString("BSc"));
+                    columnData.add(rs.getString("MA"));
+                    columnData.add(rs.getString("MSc"));
+                    columnData.add(rs.getString("PhD"));
+                    
+                    columnData.add(rs.getString("Module1"));
+                    columnData.add(rs.getString("Module2"));
+                    columnData.add(rs.getString("Module3"));
+                    columnData.add(rs.getString("Module4"));
+                    columnData.add(rs.getString("Module5"));
+                    columnData.add(rs.getString("Module6"));
+                    columnData.add(rs.getString("Module7"));
+                    columnData.add(rs.getString("Module8"));
+                    
+                    columnData.add(rs.getString("Score1"));
+                    columnData.add(rs.getString("Score2"));
+                    columnData.add(rs.getString("Score3"));
+                    columnData.add(rs.getString("Score4"));
+                    columnData.add(rs.getString("Score5"));
+                    columnData.add(rs.getString("Score6"));
+                    columnData.add(rs.getString("Score7"));
+                    columnData.add(rs.getString("Score8"));
+                    
+                    columnData.add(rs.getString("TotalScore"));
+                    columnData.add(rs.getString("Ranking"));
+                    columnData.add(rs.getString("Date"));
+                    
+                }
+                studentRecord.addRow(columnData);
+            }
+        }
+        catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jtxtFirstname = new javax.swing.JTextField();
+        jtxtStudentID = new javax.swing.JTextField();
+        jtxtAddress = new javax.swing.JTextField();
+        jtxtSurname = new javax.swing.JTextField();
+        jtxtMobile = new javax.swing.JTextField();
+        jtxtEmail = new javax.swing.JTextField();
+        jtxtDOB = new javax.swing.JTextField();
+        jcboGender = new javax.swing.JComboBox<>();
+        jPanel6 = new javax.swing.JPanel();
+        jcboCourse = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jtxtCourse = new javax.swing.JTextField();
+        jtxtFacultyname = new javax.swing.JTextField();
+        jtxtProgramleader = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jtxtCoursetutor = new javax.swing.JTextField();
+        jtxtDeanoffaculty = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jcboTwo = new javax.swing.JComboBox<>();
+        jtxtTwo = new javax.swing.JTextField();
+        jcboThree = new javax.swing.JComboBox<>();
+        jtxtThree = new javax.swing.JTextField();
+        jcboFive = new javax.swing.JComboBox<>();
+        jcboFour = new javax.swing.JComboBox<>();
+        jtxtFour = new javax.swing.JTextField();
+        jtxtFive = new javax.swing.JTextField();
+        jcboSix = new javax.swing.JComboBox<>();
+        jcboSeven = new javax.swing.JComboBox<>();
+        jcboEight = new javax.swing.JComboBox<>();
+        jtxtSix = new javax.swing.JTextField();
+        jtxtSeven = new javax.swing.JTextField();
+        jtxtDate = new javax.swing.JTextField();
+        jcboOne = new javax.swing.JComboBox<>();
+        jtxtOne = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jtxtEight = new javax.swing.JTextField();
+        jtxtTotalscore = new javax.swing.JTextField();
+        jtxtRanking = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jcboMA = new javax.swing.JComboBox<>();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jcboBA = new javax.swing.JComboBox<>();
+        jcboBSc = new javax.swing.JComboBox<>();
+        jcboPhD = new javax.swing.JComboBox<>();
+        jcboMSc = new javax.swing.JComboBox<>();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jcboGuidance = new javax.swing.JComboBox<>();
+        jtxtGfirstname = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jtxtGsurname = new javax.swing.JTextField();
+        jtxtGaddress = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jtxtGmobile = new javax.swing.JTextField();
+        jtxtGemail = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jbtnReset = new javax.swing.JButton();
+        jbtnAdd = new javax.swing.JButton();
+        jbtnExit = new javax.swing.JButton();
+        jbtnResult = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jcboOverseasstudent = new javax.swing.JComboBox<>();
+        jcboHomestudent = new javax.swing.JComboBox<>();
+        jcboScholarship = new javax.swing.JComboBox<>();
+        jcboAccomodation = new javax.swing.JComboBox<>();
+        jcboExchange = new javax.swing.JComboBox<>();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "student ID", "Firstname", "Surname", "Adress", "Gender", "DOB", "Mobile", "Email", "Course", "Course Code", "HomeStudent", "OverseaStudent", "Accomodation", "Exchange", "Scholarship", "BA", "BSc", "MA", "MSc", "PhD", "Module 1", "Module 2", "Module 3", "Module 4", "Module 5", "Module 6", "Module 7", "Module 8", "Score 1", "Score 2", "Score 3", "Score 4", "Score 5", "Score 6", "Score 7", "Score 8", "TotalScore", "Ranking", "Date"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel13.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1320, -1));
+
+        jPanel2.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1330, 490));
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel1.setText("STUDENT DETAILS MANAGEMENT ");
+        jPanel14.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+
+        jPanel2.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1330, 80));
+
+        jTabbedPane1.addTab("Student details", jPanel2);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Firstname");
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Student ID");
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("Surname");
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Address");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Gender");
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("DOB");
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("Mobile");
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Email");
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        jPanel5.add(jtxtFirstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 260, -1));
+        jPanel5.add(jtxtStudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 260, -1));
+        jPanel5.add(jtxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 260, -1));
+        jPanel5.add(jtxtSurname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 260, -1));
+        jPanel5.add(jtxtMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 260, -1));
+        jPanel5.add(jtxtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 260, -1));
+        jPanel5.add(jtxtDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 260, -1));
+
+        jcboGender.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Female", "Male" }));
+        jPanel5.add(jcboGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 260, -1));
+
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 290));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jcboCourse.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a course", "BSc Computing", "BSc Computer Science", "BSc Gaming", "BSc Engineering" }));
+        jPanel6.add(jcboCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 260, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Course");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jPanel6.add(jtxtCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 260, -1));
+        jPanel6.add(jtxtFacultyname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 260, -1));
+        jPanel6.add(jtxtProgramleader, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 260, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setText("Course Code");
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setText("Faculty Name");
+        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel13.setText("Dean of Faculty");
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("Program Leader");
+        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setText("Course Tutor");
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jPanel6.add(jtxtCoursetutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 260, -1));
+        jPanel6.add(jtxtDeanoffaculty, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 260, -1));
+
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 470, 230));
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 140));
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("2");
+        jLabel32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 30, 20));
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel33.setText("No");
+        jPanel7.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel34.setText("Date");
+        jPanel7.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel35.setText("Module Selector");
+        jPanel7.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("1");
+        jLabel36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 30, 20));
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("4");
+        jLabel37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 30, 20));
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel38.setText("3");
+        jLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 30, 20));
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel39.setText("5");
+        jLabel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 30, 20));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("6");
+        jLabel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 30, 20));
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("7");
+        jLabel41.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 30, 20));
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("8");
+        jLabel42.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 30, 20));
+
+        jcboTwo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboTwo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 150, 20));
+        jPanel7.add(jtxtTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 60, 20));
+
+        jcboThree.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboThree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboThree, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 150, 20));
+        jPanel7.add(jtxtThree, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 60, 20));
+
+        jcboFive.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboFive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboFive, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 150, 20));
+
+        jcboFour.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboFour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboFour, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 150, 20));
+        jPanel7.add(jtxtFour, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 60, 20));
+        jPanel7.add(jtxtFive, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 60, 20));
+
+        jcboSix.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboSix.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai", " " }));
+        jPanel7.add(jcboSix, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 150, 20));
+
+        jcboSeven.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboSeven.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboSeven, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 150, 20));
+
+        jcboEight.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboEight.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboEight, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 150, 20));
+        jPanel7.add(jtxtSix, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 60, 20));
+        jPanel7.add(jtxtSeven, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 60, 20));
+        jPanel7.add(jtxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 140, 20));
+
+        jcboOne.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboOne.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SQL", "Web development", "Cyber Security", "Math", "System Analysis", "Programming", "Ai" }));
+        jPanel7.add(jcboOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 150, 20));
+        jPanel7.add(jtxtOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 60, 20));
+
+        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel43.setText("Score");
+        jPanel7.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel44.setText("Total Score");
+        jPanel7.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel45.setText("Ranking");
+        jPanel7.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
+        jPanel7.add(jtxtEight, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 60, 20));
+        jPanel7.add(jtxtTotalscore, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 140, 20));
+        jPanel7.add(jtxtRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 140, 20));
+
+        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 340, 570));
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jcboMA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboMA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jPanel8.add(jcboMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 70, -1));
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel27.setText("BSc");
+        jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel28.setText("BA");
+        jPanel8.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel29.setText(" PhD");
+        jPanel8.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel30.setText("MA");
+        jPanel8.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel31.setText("MSc");
+        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jcboBA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboBA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jPanel8.add(jcboBA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 70, -1));
+
+        jcboBSc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboBSc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jPanel8.add(jcboBSc, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 70, -1));
+
+        jcboPhD.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboPhD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jPanel8.add(jcboPhD, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 70, -1));
+
+        jcboMSc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboMSc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jPanel8.add(jcboMSc, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 70, -1));
+
+        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 250, 160, 220));
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel16.setText("Guidance");
+        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jcboGuidance.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboGuidance.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sister", "Brother", "Uncle", "Mother", "Father", "Both Parents", "Aunt", "Grandparent", "Other" }));
+        jPanel10.add(jcboGuidance, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 260, -1));
+        jPanel10.add(jtxtGfirstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 260, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setText("Firstname");
+        jPanel10.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel18.setText("Surname");
+        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel10.add(jtxtGsurname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 260, -1));
+
+        jtxtGaddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtGaddressActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jtxtGaddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 260, -1));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setText("Address");
+        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel20.setText("Mobile");
+        jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel21.setText("E-mail");
+        jPanel10.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jPanel10.add(jtxtGmobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 260, -1));
+
+        jtxtGemail.setText("jTextField1");
+        jPanel10.add(jtxtGemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 260, -1));
+
+        jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 470, 270));
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel11.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 230, 50));
+
+        jbtnReset.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jbtnReset.setText("Reset");
+        jPanel11.add(jbtnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
+
+        jbtnAdd.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jbtnAdd.setText("Add");
+        jbtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAddActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jbtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jbtnExit.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jbtnExit.setText("Exit");
+        jbtnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnExitActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jbtnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
+
+        jbtnResult.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jbtnResult.setText("Result");
+        jbtnResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnResultActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jbtnResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
+
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 470, 100));
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 8));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel22.setText("Scholarship");
+        jPanel12.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel23.setText("Exchange");
+        jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel24.setText("Accomodation");
+        jPanel12.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 150, -1));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel25.setText("Overseas Student");
+        jPanel12.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 170, -1));
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel26.setText("Home Student");
+        jPanel12.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, -1));
+
+        jcboOverseasstudent.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboOverseasstudent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
+        jPanel12.add(jcboOverseasstudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 70, -1));
+
+        jcboHomestudent.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboHomestudent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
+        jPanel12.add(jcboHomestudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 70, -1));
+
+        jcboScholarship.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboScholarship.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
+        jPanel12.add(jcboScholarship, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 70, -1));
+
+        jcboAccomodation.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboAccomodation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
+        jPanel12.add(jcboAccomodation, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 70, -1));
+
+        jcboExchange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jcboExchange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
+        jPanel12.add(jcboExchange, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 70, -1));
+
+        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 300, 220));
+
+        jTabbedPane1.addTab("school system", jPanel3);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 630));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlCon = DriverManager.getConnection(datacon,username,password);
+            pst = sqlCon.prepareStatement("insert into stdb (StudentID, Firstname, Surname, Address, Gender, DOB,"
+                    + "Mobile, Email, Course, CourseCode, HomeStudent, OverSeaStudent, Accomodation, Exchange, Scholarship,"
+                    + "BA, BSc, MA, MSc, PhD, Module1, Module2, Module3, Module4, Module5, Module6, Module7, Module8,"
+                    + "Score1, Score2, Score3, Score4, Score5, Score6, Score7, Score8, TotalScore, Ranking, Date)"
+                   + "value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            
+            pst.setString(1, jtxtStudentID.getText());
+            pst.setString(2, jtxtFirstname.getText());
+            pst.setString(3, jtxtSurname.getText());
+            pst.setString(4, jtxtAddress.getText());
+            pst.setString(5, (String) jcboGender.getSelectedItem());
+            pst.setString(6, jtxtDOB.getText());
+            pst.setString(7, jtxtMobile.getText());
+            pst.setString(8, jtxtEmail.getText());
+            
+            
+            pst.setString(9, (String) jcboCourse.getSelectedItem());
+            pst.setString(10, jtxtCourse.getText());
+            pst.setString(11, (String) jcboHomestudent.getSelectedItem());
+            pst.setString(12, (String) jcboOverseasstudent.getSelectedItem());
+            pst.setString(13, (String) jcboAccomodation.getSelectedItem());
+            pst.setString(14, (String) jcboExchange.getSelectedItem());
+            pst.setString(15, (String) jcboScholarship.getSelectedItem());
+            
+            pst.setString(16, (String) jcboBA.getSelectedItem());
+            pst.setString(17, (String) jcboBSc.getSelectedItem());
+            pst.setString(18, (String) jcboMA.getSelectedItem());
+            pst.setString(19, (String) jcboMSc.getSelectedItem());
+            pst.setString(20, (String) jcboPhD.getSelectedItem());
+            
+            pst.setString(21, (String) jcboOne.getSelectedItem());
+            pst.setString(22, (String) jcboTwo.getSelectedItem());
+            pst.setString(23, (String) jcboThree.getSelectedItem());
+            pst.setString(24, (String) jcboFour.getSelectedItem());
+            pst.setString(25, (String) jcboFive.getSelectedItem());
+            pst.setString(26, (String) jcboSix.getSelectedItem());
+            pst.setString(27, (String) jcboSeven.getSelectedItem());
+            pst.setString(28, (String) jcboEight.getSelectedItem());
+            
+            pst.setString(29, jtxtOne.getText());
+            pst.setString(30, jtxtTwo.getText());
+            pst.setString(31, jtxtThree.getText());
+            pst.setString(32, jtxtFour.getText());
+            pst.setString(33, jtxtFive.getText());
+            pst.setString(34, jtxtSix.getText());
+            pst.setString(35, jtxtSeven.getText());
+            pst.setString(36, jtxtEight.getText());
+            
+            pst.setString(37, jtxtTotalscore.getText());
+            pst.setString(38, jtxtRanking.getText());
+            pst.setString(39, jtxtDate.getText());
+            
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Student Management System");
+            uploadDB();
+           
+        }
+        catch (ClassNotFoundException ex){
+            java.util.logging.Logger.getLogger(Home.class.getName()).log
+        (java.util.logging.Level.SEVERE,null, ex);
+        }
+        catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Home.class.getName()).log
+        (java.util.logging.Level.SEVERE,null, ex);
+        }
+    }//GEN-LAST:event_jbtnAddActionPerformed
+
+    private void jtxtGaddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtGaddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtGaddressActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+       uploadDB();
+    }//GEN-LAST:event_formWindowActivated
+
+    private JFrame frame;
+    private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
+    frame = new JFrame("Exit");
+    
+    if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "Student Management System",
+         JOptionPane.YES_NO_OPTION )== JOptionPane.YES_NO_OPTION)
+    {
+        System.exit(0);
+    }
+    }//GEN-LAST:event_jbtnExitActionPerformed
+
+    private void jbtnResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnResultActionPerformed
+       int[] marks = new int[9];
+       
+marks[0] = Integer.parseInt(jtxtOne.getText());
+marks[1] = Integer.parseInt(jtxtTwo.getText());
+marks[2] = Integer.parseInt(jtxtThree.getText());
+marks[3] = Integer.parseInt(jtxtFour.getText());
+marks[5] = Integer.parseInt(jtxtFive.getText());
+marks[6] = Integer.parseInt(jtxtSix.getText());
+marks[7] = Integer.parseInt(jtxtSeven.getText());
+marks[8] = Integer.parseInt(jtxtEight.getText());
+
+marks[8] = marks[0] + marks[1] + marks[3] + marks[4] + marks[5] + marks[6] + marks[7];
+jtxtTotalscore.setText(Integer.toString(marks[8]));
+
+if (marks[8] >= 700)
+{
+    jtxtRanking.setText("Distinction");
+}
+else if (marks[8] >= 500)
+{
+    jtxtRanking.setText("Merit");
+}
+else if (marks[8] >= 300)
+{
+    jtxtRanking.setText("Credit");
+}
+else if (marks[8] >= 100)
+{
+    jtxtRanking.setText("Pass");
+}
+else if (marks[8] >= 90)
+{
+    jtxtRanking.setText("Fail");
+}
+
+Date date = jCalendar1.getDate();
+DateFormat df = new SimpleDateFormat("ss/mm/yyyy");
+String strDate = df.format(date);
+jtxtDate.setText(strDate);
+
+    }//GEN-LAST:event_jbtnResultActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Home().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar jCalendar1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtnAdd;
+    private javax.swing.JButton jbtnExit;
+    private javax.swing.JButton jbtnReset;
+    private javax.swing.JButton jbtnResult;
+    private javax.swing.JComboBox<String> jcboAccomodation;
+    private javax.swing.JComboBox<String> jcboBA;
+    private javax.swing.JComboBox<String> jcboBSc;
+    private javax.swing.JComboBox<String> jcboCourse;
+    private javax.swing.JComboBox<String> jcboEight;
+    private javax.swing.JComboBox<String> jcboExchange;
+    private javax.swing.JComboBox<String> jcboFive;
+    private javax.swing.JComboBox<String> jcboFour;
+    private javax.swing.JComboBox<String> jcboGender;
+    private javax.swing.JComboBox<String> jcboGuidance;
+    private javax.swing.JComboBox<String> jcboHomestudent;
+    private javax.swing.JComboBox<String> jcboMA;
+    private javax.swing.JComboBox<String> jcboMSc;
+    private javax.swing.JComboBox<String> jcboOne;
+    private javax.swing.JComboBox<String> jcboOverseasstudent;
+    private javax.swing.JComboBox<String> jcboPhD;
+    private javax.swing.JComboBox<String> jcboScholarship;
+    private javax.swing.JComboBox<String> jcboSeven;
+    private javax.swing.JComboBox<String> jcboSix;
+    private javax.swing.JComboBox<String> jcboThree;
+    private javax.swing.JComboBox<String> jcboTwo;
+    private javax.swing.JTextField jtxtAddress;
+    private javax.swing.JTextField jtxtCourse;
+    private javax.swing.JTextField jtxtCoursetutor;
+    private javax.swing.JTextField jtxtDOB;
+    private javax.swing.JTextField jtxtDate;
+    private javax.swing.JTextField jtxtDeanoffaculty;
+    private javax.swing.JTextField jtxtEight;
+    private javax.swing.JTextField jtxtEmail;
+    private javax.swing.JTextField jtxtFacultyname;
+    private javax.swing.JTextField jtxtFirstname;
+    private javax.swing.JTextField jtxtFive;
+    private javax.swing.JTextField jtxtFour;
+    private javax.swing.JTextField jtxtGaddress;
+    private javax.swing.JTextField jtxtGemail;
+    private javax.swing.JTextField jtxtGfirstname;
+    private javax.swing.JTextField jtxtGmobile;
+    private javax.swing.JTextField jtxtGsurname;
+    private javax.swing.JTextField jtxtMobile;
+    private javax.swing.JTextField jtxtOne;
+    private javax.swing.JTextField jtxtProgramleader;
+    private javax.swing.JTextField jtxtRanking;
+    private javax.swing.JTextField jtxtSeven;
+    private javax.swing.JTextField jtxtSix;
+    private javax.swing.JTextField jtxtStudentID;
+    private javax.swing.JTextField jtxtSurname;
+    private javax.swing.JTextField jtxtThree;
+    private javax.swing.JTextField jtxtTotalscore;
+    private javax.swing.JTextField jtxtTwo;
+    // End of variables declaration//GEN-END:variables
+}
